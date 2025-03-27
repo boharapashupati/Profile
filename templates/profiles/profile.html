@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="profile-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center">
+                {% if profile.avatar %}
+                    <img src="{{ profile.avatar.url }}" alt="Profile Avatar" class="img-fluid rounded-circle profile-avatar" style="max-width: 200px;">
+                {% else %}
+                    <img src="https://via.placeholder.com/200" alt="Default Avatar" class="img-fluid rounded-circle profile-avatar">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <h2>{{ profile.user.get_full_name }}</h2>
+                <p class="text-muted">@{{ profile.user.username }}</p>
+                <div class="profile-completion-bar">
+                    <div class="completion-progress" style="width: {{ completion_percentage }}%"></div>
+                </div>
+                <p class="text-white-50">Profile Completion: {{ completion_percentage }}%</p>
+                <p class="last-login">Last Active: {{ profile.last_login|timesince }} ago</p>
+                <p class="profile-views">Profile Views: {{ profile.profile_views }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h4>About Me</h4>
+                    <p>{{ profile.bio|default:"No bio yet"|linebreaks }}</p>
+                    
+                    <h4>Contact Information</h4>
+                    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+                    <p><strong>Phone:</strong> {{ profile.phone_number|default:"Not provided" }}</p>
+                    <p><strong>Location:</strong> {{ profile.location|default:"Not specified" }}</p>
+                    
+                    <h4>Social Media</h4>
+                    <div class="social-links mb-3">
+                        {% if profile.facebook_url %}
+                            <a href="{{ profile.facebook_url }}" class="btn btn-outline-primary me-2" target="_blank">
+                                <i class="fab fa-facebook"></i> Facebook
+                            </a>
+                        {% endif %}
+                        {% if profile.twitter_url %}
+                            <a href="{{ profile.twitter_url }}" class="btn btn-outline-info me-2" target="_blank">
+                                <i class="fab fa-twitter"></i> Twitter
+                            </a>
+                        {% endif %}
+                        {% if profile.linkedin_url %}
+                            <a href="{{ profile.linkedin_url }}" class="btn btn-outline-secondary" target="_blank">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h4>Professional Information</h4>
+                    <div class="mb-4">
+                        <h5>Skills</h5>
+                        <p>{{ profile.skills|default:"No skills listed"|linebreaks }}</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Education</h5>
+                        <p>{{ profile.education|default:"No education history listed"|linebreaks }}</p>
+                    </div>
+                    
+                    <div>
+                        <h5>Work Experience</h5>
+                        <p>{{ profile.work_experience|default:"No work experience listed"|linebreaks }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h4>Quick Actions</h4>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'profile_edit' %}" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </a>
+                        <a href="{% url 'password_change' %}" class="btn btn-secondary">
+                            <i class="fas fa-key"></i> Change Password
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %} 

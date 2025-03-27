@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Edit Profile</h2>
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <!-- Basic Information -->
+                            <div class="col-md-12 mb-4">
+                                <h4>Basic Information</h4>
+                                <div class="mb-3">
+                                    <label for="{{ form.avatar.id_for_label }}" class="form-label">Profile Picture</label>
+                                    {{ form.avatar }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.bio.id_for_label }}" class="form-label">Bio</label>
+                                    {{ form.bio }}
+                                </div>
+                            </div>
+
+                            <!-- Contact Information -->
+                            <div class="col-md-6 mb-4">
+                                <h4>Contact Information</h4>
+                                <div class="mb-3">
+                                    <label for="{{ form.phone_number.id_for_label }}" class="form-label">Phone Number</label>
+                                    {{ form.phone_number }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.location.id_for_label }}" class="form-label">Location</label>
+                                    {{ form.location }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.birth_date.id_for_label }}" class="form-label">Birth Date</label>
+                                    {{ form.birth_date }}
+                                </div>
+                            </div>
+
+                            <!-- Social Media Links -->
+                            <div class="col-md-6 mb-4">
+                                <h4>Social Media</h4>
+                                <div class="mb-3">
+                                    <label for="{{ form.facebook_url.id_for_label }}" class="form-label">Facebook URL</label>
+                                    {{ form.facebook_url }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.twitter_url.id_for_label }}" class="form-label">Twitter URL</label>
+                                    {{ form.twitter_url }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.linkedin_url.id_for_label }}" class="form-label">LinkedIn URL</label>
+                                    {{ form.linkedin_url }}
+                                </div>
+                            </div>
+
+                            <!-- Professional Information -->
+                            <div class="col-md-12 mb-4">
+                                <h4>Professional Information</h4>
+                                <div class="mb-3">
+                                    <label for="{{ form.skills.id_for_label }}" class="form-label">Skills</label>
+                                    {{ form.skills }}
+                                    <small class="form-text text-muted">List your skills, separated by new lines</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.education.id_for_label }}" class="form-label">Education</label>
+                                    {{ form.education }}
+                                    <small class="form-text text-muted">List your educational background</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="{{ form.work_experience.id_for_label }}" class="form-label">Work Experience</label>
+                                    {{ form.work_experience }}
+                                    <small class="form-text text-muted">List your work experience</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                Please correct the errors below.
+                            </div>
+                        {% endif %}
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Add some custom styling for form elements */
+    .form-control {
+        margin-bottom: 10px;
+    }
+    textarea.form-control {
+        min-height: 100px;
+    }
+</style>
+{% endblock %} 
