@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Django User Profile System
 
 A modern and feature-rich user profile system built with Django. This system allows users to create profiles, manage their information, and showcase their professional details.
@@ -160,3 +161,6 @@ For support, please open an issue in the repository or contact the maintainers.
 - Bootstrap 5
 - Font Awesome Icons
 - All contributors and users 
+=======
+# Profile
+>>>>>>> 3725ef90bd2d394463f3a675bf18022420b2a5f0
